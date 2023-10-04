@@ -1,2 +1,2 @@
-# squeezedom
-Squeezedom: Your Personal Wisdom Squeezer
+# Squeezedom: Your Personal Wisdom Squeezer
+Squeezedom is a tool for students studying natural sciences who frequently encounter multiple formulas. This tool would utilize trained publicly available image recognition and natural language processing artificial intelligence models to extract text from student-submitted materials, such as books, presentations, or distributed lecture materials. The resulting extracted text will be analyzed to highlight and identify formulas and essential information within. The software will automatically process this data, format it nicely, and output the results in a separate file, making it easily readable and understandable for the user. Such a solution will enable students to more effectively review and understand study materials, focusing on the most crucial aspects and saving time.
