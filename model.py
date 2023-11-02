@@ -12,7 +12,7 @@ text = pytesseract.image_to_string(image)
 
 message = f"Hi ChatGPT! Please, solve the following problems:\n{text}"
 
-completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": message}])
+# completion = openai.ChatCompletion.create(model="gpt-4", messages=[{"role": "user", "content": message}])
 print(completion.choices[0].message.content)
 
 print(text)
