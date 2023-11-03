@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processed Images</title>
+</head>
+<body>
+    <h1>Processed Images</h1>
+    <div class="processed_images">
+        {% for image_name in image_names %}
+            <img src="{{ url_for('render_file', filename=image_name) }}" alt="Photo">
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('index') }}">Back to Main Page</a>
+</body>
+</html>
