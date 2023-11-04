@@ -2,8 +2,9 @@ import os
 
 from flask import render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
-from app.utils import allowed_file
 from app import app
+
+import model
 
 
 @app.route('/')
@@ -14,15 +15,15 @@ def index():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        if 'file' not in request.files:
+        file = request.files.get('file')
+        if not file or file.filename == '':
             return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('success', filename=filename))
+
+        image_name = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_name))
+        image_name = model.image_to_png(app.config['UPLOAD_FOLDER'], image_name)
+        return redirect(url_for('success', filename=image_name))
+
     return render_template('upload.html')
 
 

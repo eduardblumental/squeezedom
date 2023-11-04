@@ -1,18 +1,33 @@
 import os
 
-import cv2
 import openai
-from pytesseract import pytesseract
+from PIL import Image
 
-pytesseract.tesseract_cmd = os.environ.get("TESSERACT_PATH")
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-image = cv2.imread("test_pic.jpg")
-text = pytesseract.image_to_string(image)
 
-message = f"Hi ChatGPT! Please, solve the following problems:\n{text}"
+def image_to_png(dir_path, image_name):
+    image_path = os.path.join(dir_path, image_name)
+    with Image.open(image_path) as img:
+        r = img.height/img.width
+        img = img.resize((256, int(256*r))).convert('RGBA')
 
-# completion = openai.ChatCompletion.create(model="gpt-4", messages=[{"role": "user", "content": message}])
-print(completion.choices[0].message.content)
+        name, ext = os.path.splitext(image_name)
+        img.save(os.path.join(dir_path, f"{name}.png"), format="PNG")
 
-print(text)
+        if ext != ".png":
+            os.remove(image_path)
+
+        return f"{name}.png"
+
+
+def process_image(dir_path, image_name):
+    response = openai.Image.create_edit(
+        image=open(os.path.join(dir_path, image_name), "rb"),
+        prompt="Hi ChatGPT! Please, find formulas in the uploaded image and create another image, where those formulas are nicely formatted.",
+        n=1,
+        size="256x256"
+    )
+
+    image_url = response['data'][0]['url']
+    print(image_url)
