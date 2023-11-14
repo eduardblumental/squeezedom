@@ -21,8 +21,8 @@ def upload_file():
             return redirect(request.url)
 
         image_name = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_name))
-        image_name = model.image_to_png(app.config['UPLOAD_FOLDER'], image_name)
+        file.save(os.path.join(app.config['UPLOADED_FOLDER'], image_name))
+        image_name = model.image_to_png(app.config['UPLOADED_FOLDER'], image_name)
         return redirect(url_for('success', filename=image_name))
 
     return render_template('upload.html')
@@ -33,12 +33,17 @@ def success(filename):
     return render_template('success.html', filename=filename)
 
 
-@app.route('/uploads/<filename>')
-def render_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+@app.route('/uploaded/<filename>')
+def render_uploaded_file(filename):
+    return send_from_directory(app.config['UPLOADED_FOLDER'], filename)
+
+
+@app.route('/processed/<filename>')
+def render_processed_file(filename):
+    return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
 
 
 @app.route('/processed_images')
 def processed_images():
-    image_names = [f for f in os.listdir(app.config['UPLOAD_FOLDER'])]
+    image_names = [f for f in os.listdir(app.config['UPLOADED_FOLDER'])]
     return render_template('processed_images.html', image_names=image_names)

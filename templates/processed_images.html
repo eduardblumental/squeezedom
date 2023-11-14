@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block content %}
-<h1>Processed Images</h1>
+<h1>Processed images</h1>
 <br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div id="carouselID" class="carousel slide mx-auto" data-bs-ride="carousel">
+            <div id="carouselID" class="carousel slide mx-auto" data-bs-ride="carousel" data-bs-interval="false">
                 <div class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         {% for image_name in image_names %}
@@ -23,7 +23,7 @@
                     <div class="carousel-inner">
                         {% for image_name in image_names %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
-                            <img src="{{ url_for('render_file', filename=image_name) }}" class="d-block"
+                            <img src="{{ url_for('render_processed_file', filename=image_name) }}" class="d-block"
                                  alt="Photo">
                         </div>
                         {% endfor %}

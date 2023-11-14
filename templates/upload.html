@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block content %}
-<h1>Please, upload an Image</h1>
-<div class="container mt-5" style="border: 2px solid white; width: 600px;">
-<form method=post enctype=multipart/form-data>
-    <input type=file name=file style="margin: 10px;">
-    <input type=submit value=Upload style="margin: 10px;">
+<h1>Please, upload an image</h1>
+<div class="container mt-5" style="border: 4px solid white; border-radius: 25px; width: 600px;">
+<form method=post enctype=multipart/form-data style="margin: 15px; padding-left: 15px; padding-right: 15px">
+    <input type=file name=file>
+    <input type=submit value=Upload style="padding-left: 15px; padding-right: 15px">
 </form>
 </div>
 <button class="mybutton btn btn-light" type="button" onclick="location.href='{{ url_for('index') }}'">Back to Main Page</button>

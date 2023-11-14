@@ -22,7 +22,7 @@ def image_to_png(dir_path, image_name):
 
 
 def process_image():
-    with open("uploads\\test_formulas.png", "rb") as image_file:
+    with open("uploaded\\test_formulas.png", "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
 
     question = f"What formulas do you see on the image?"
