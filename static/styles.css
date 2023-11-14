@@ -6,7 +6,7 @@
 .banner{
 	width: 100%;
 	height: 100vh;
-	background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("background.jpg");
+	background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("background.jpeg");
 	background-size: cover;
 	background-position: center;
 }
@@ -19,8 +19,11 @@
 	color: #fff;
 }
 .content h1{
-	font-size: 70px;
-	margin-top: 50px;
+	font-size: 60px;
+	margin-top: 20px;
+}
+.content h2{
+	font-size: 23px;
 	margin-bottom: 60px;
 }
 .content p{
@@ -29,34 +32,23 @@
 	font-weight: 100;
 	line-height: 5px;
 }
-button{
-	width: 200px;
-	padding: 15px 0;
-	text-align: center;
-	margin: 50px 10px;
-	border-radius: 25px;
-	font-weight: bold;
-	border: 2px solid #75b2bd;
-	background: transparent;
-	color: #fff;
-	cursor: pointer;
-	position: relative;
-	overflow: hidden;
+.upload-form {
+    idth: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
-span{
-	background: #75b2bd;
-	height: 100%;
-	width: 100%;
-	border-radius: 25px;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	z-index: -1;
-	transition: 0.5s;
+.upload-btn-wrapper {
+    text-align: center;
+    margin-top: 20px;
 }
-button:hover span{
-	width: 100%;
-}
-button:hover {
-	border: none;
+.carousel-item img {
+    height: auto;
+    max-height:
+    width: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }

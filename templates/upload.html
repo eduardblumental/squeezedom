@@ -1,9 +1,17 @@
-<!doctype html>
+{% extends "layout.html" %}
+
+{% block title %}
+<link rel="stylesheet" href="{{ url_for('static', filename='buttons.css') }}">
 <title>Upload an image</title>
-<h1>Upload an image</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Please, upload an Image</h1>
+<div class="container mt-5" style="border: 2px solid white; width: 600px;">
 <form method=post enctype=multipart/form-data>
-  <input type=file name=file>
-  <input type=submit value=Upload>
+    <input type=file name=file style="margin: 10px;">
+    <input type=submit value=Upload style="margin: 10px;">
 </form>
-<br>
-<a href="{{ url_for('index') }}">Cancel</a>
+</div>
+<button class="mybutton btn btn-light" type="button" onclick="location.href='{{ url_for('index') }}'">Back to Main Page</button>
+{% endblock %}

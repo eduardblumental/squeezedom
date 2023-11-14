@@ -1,12 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main Page</title>
-</head>
-<body>
-    <h1>Welcome to Squeezedom!</h1>
-    <a href="{{ url_for('upload_file') }}">Upload an image</a><br>
-    <a href="{{ url_for('processed_images') }}">Processed images</a>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+<link rel="stylesheet" href="{{ url_for('static', filename='buttons.css') }}">
+<title>Squeezedom</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Squeezedom</h1>
+<h2>Your Personal Wisdom Squeezer</h2>
+<p>We will help You review study materials,</p>
+<p>focus on the most crucial aspects</p>
+<p>and save a lot of time.</p>
+<div>
+    <button type="button" class="mybutton btn btn-light" disabled>
+        TAKE A PICTURE
+    </button>
+    <button type="button" class="mybutton btn btn-light" onclick="location.href='{{ url_for('upload_file') }}'">
+        UPLOAD IMAGE
+    </button>
+    <button type="button" class="mybutton btn btn-light" onclick="location.href='{{ url_for('processed_images') }}'">
+        PROCESSED IMAGES
+    </button>
+</div>
+{% endblock %}

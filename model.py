@@ -1,4 +1,4 @@
-import os
+import os, base64
 
 import openai
 from PIL import Image
@@ -9,8 +9,8 @@ openai.api_key = os.environ.get("OPENAI_API_KEY")
 def image_to_png(dir_path, image_name):
     image_path = os.path.join(dir_path, image_name)
     with Image.open(image_path) as img:
-        r = img.height/img.width
-        img = img.resize((256, int(256*r))).convert('RGBA')
+        r = img.width/img.height
+        img = img.resize((int(412*r), 412)).convert('RGBA')
 
         name, ext = os.path.splitext(image_name)
         img.save(os.path.join(dir_path, f"{name}.png"), format="PNG")
@@ -21,13 +21,30 @@ def image_to_png(dir_path, image_name):
         return f"{name}.png"
 
 
-def process_image(dir_path, image_name):
-    response = openai.Image.create_edit(
-        image=open(os.path.join(dir_path, image_name), "rb"),
-        prompt="Hi ChatGPT! Please, find formulas in the uploaded image and create another image, where those formulas are nicely formatted.",
-        n=1,
-        size="256x256"
+def process_image():
+    with open("uploads\\test_formulas.png", "rb") as image_file:
+        encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+    question = f"What formulas do you see on the image?"
+
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant capable of reading and describing images."},
+        {"role": "user", "content": question},
+        {"role": "assistant", "content": encoded_image, "mime_type": "image/png"}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages
     )
 
-    image_url = response['data'][0]['url']
-    print(image_url)
+    return response
+
+
+def main():
+    response = process_image()
+    print(response)
+
+
+if __name__ == "__main__":
+    main()

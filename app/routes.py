@@ -16,6 +16,7 @@ def index():
 def upload_file():
     if request.method == 'POST':
         file = request.files.get('file')
+        print(file)
         if not file or file.filename == '':
             return redirect(request.url)
 
